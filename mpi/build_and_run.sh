@@ -12,8 +12,8 @@ just_file="$(basename $full_path)"
 output_file="${just_file%.*}.out"
 output_path="./bin/$output_file"
 
-echo "Building: $full_path"
-echo "Outputing to: $output_path"
+echo -e "Building: \t $full_path"
+echo -e "Outputing to: \t $output_path"
 
 mpicc "$full_path" -o "$output_path"
 
@@ -24,7 +24,7 @@ then
 	exit 1
 fi
 
-echo "Running on: $2 processes"
+echo -e "Running on: \t $2 processes"
 echo "..."
 
 proc_num="$2"

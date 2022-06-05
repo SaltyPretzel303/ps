@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h> // usleep
+
 #include <mpi.h>
 
-#define TRUE 1
-#define FALSE 0
+// Calculate value of number PI as a value of integral of function f(x) = 4 / (1+x^2)
+// on interval [0,1].
+
+// Napisati MPI program koji izračunava vrednost broja PI kao vrednost
+// integrala funkcije f(x) = 4 / (1 + x^2) na intervalu[0, 1].
 
 void init_buff(int *buff, int len)
 {
@@ -22,7 +25,7 @@ int main(int argc, char **argv)
 	const int BUFF_SIZE = 20;
 	const int MASTER_RANK = 0;
 	const int MPI_NO_ERROR = MPI_SUCCESS;
-	const int SLEEP_PERIOD = 3000;
+	// just to remember the name of the mpi constant
 
 	int my_rank;
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
@@ -35,7 +38,7 @@ int main(int argc, char **argv)
 		init_buff(buff, BUFF_SIZE);
 
 		printf("{%d} Sending buffer\n", my_rank);
-		// MPI_Send(buff, BUFF_SIZE, MPI_INTEGER, 1, 0, MPI_COMM_WORLD);
+		MPI_Send(buff, BUFF_SIZE, MPI_INTEGER, 1, 0, MPI_COMM_WORLD);
 
 		free(buff);
 	}
@@ -45,7 +48,7 @@ int main(int argc, char **argv)
 		int *recv_buff = (int *)malloc(BUFF_SIZE * sizeof(int));
 		MPI_Status recv_status;
 
-		// MPI_Recv(recv_buff, BUFF_SIZE, MPI_INTEGER, MASTER_RANK, 0, MPI_COMM_WORLD, &recv_status);
+		MPI_Recv(recv_buff, BUFF_SIZE, MPI_INTEGER, MASTER_RANK, 0, MPI_COMM_WORLD, &recv_status);
 		if (recv_status.MPI_ERROR != MPI_NO_ERROR)
 		{
 			printf("In proc. %d we got an MPI_ERROR: %d", my_rank, recv_status.MPI_ERROR);
