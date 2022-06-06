@@ -12,7 +12,7 @@
 // in the previous version if buff_size=11 and proc_count=5 the last element will
 // never be processed  (11/5 = 2 -> every process will get 2 elements)
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{

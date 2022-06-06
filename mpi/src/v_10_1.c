@@ -9,7 +9,7 @@
 // send elements of the upper triangular matrix from master process
 // to some other process, forming the upper triangular matrix in that process as well
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{

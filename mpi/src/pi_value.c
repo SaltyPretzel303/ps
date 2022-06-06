@@ -9,7 +9,7 @@
 // Napisati MPI program koji izračunava vrednost broja PI kao vrednost
 // integrala funkcije f(x) = 4 / (1 + x^2) na intervalu[0, 1].
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 	if (my_rank == MASTER_RANK)
 	{
 		int *buff = (int *)malloc(BUFF_SIZE * sizeof(int));
-		init_buff(buff, BUFF_SIZE);
+		init_vec(buff, BUFF_SIZE);
 
 		printf("{%d} Sending buffer\n", my_rank);
 		MPI_Send(buff, BUFF_SIZE, MPI_INTEGER, 1, 0, MPI_COMM_WORLD);

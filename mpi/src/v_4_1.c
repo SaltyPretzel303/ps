@@ -7,7 +7,7 @@
 // Calculate scalar product of two vectors;
 // !! works only if BUFF_SIZE is divideable by process count
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{

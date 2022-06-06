@@ -9,7 +9,7 @@
 // scatter n/p columns (n = mat size, p = process count)
 // implemented using custom type that "contains" n/p columns
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{

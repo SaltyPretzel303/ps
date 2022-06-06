@@ -9,7 +9,7 @@
 // master process reads one integer and one float number and then bcast them
 // to the rest of the processes using single command/send_method
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{

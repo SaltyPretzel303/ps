@@ -6,7 +6,7 @@
 // Find a sum of N integers using ptp communicaiton model is such way that
 // every process participate in summation.
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{

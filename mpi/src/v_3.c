@@ -7,7 +7,7 @@
 // Every process contains 30 integers. Find the maximum value on each of the
 // 30 positions and the index of process that contains it.
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{

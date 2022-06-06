@@ -6,7 +6,7 @@
 
 // Just a simple example of MPI_Scatter and MPI_Gather
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 
 	if (my_rank == MASTER_RANK)
 	{
-		init_buff(buff, comm_size);
+		init_vec(buff, comm_size);
 		printf("{%d} Sending buffer\n", my_rank);
 		print_buff(buff, comm_size);
 		printf("\n");

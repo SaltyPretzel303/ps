@@ -6,7 +6,7 @@
 // Simple scatter example to show that if the process count is greater than the
 // buff size, some of the processes will simple not receive any value ...
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{
@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 	MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
 
 	int *buff = (int *)malloc(BUFF_SIZE * sizeof(MPI_INTEGER));
-	init_buff(buff, BUFF_SIZE);
+	init_vec(buff, BUFF_SIZE);
 
 	int local_value = -1;
 

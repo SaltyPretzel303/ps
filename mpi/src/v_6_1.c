@@ -13,7 +13,7 @@
 
 // implemented using MPI_Comm_split
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{

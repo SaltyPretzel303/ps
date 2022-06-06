@@ -6,7 +6,7 @@
 #define TRUE 1
 #define FALSE 0
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 
 	if (my_rank == MASTER_RANK)
 	{
-		init_buff(vec, vec_len);
+		init_vec(vec, vec_len);
 		MPI_Send(vec, 1, new_type, 1, 0, MPI_COMM_WORLD);
 	}
 	else

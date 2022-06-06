@@ -14,7 +14,7 @@
 // i pošalje ih procesu i+1,sve dok se ne stigne do poslednjeg procesa.
 // Unos podataka se završava nakon što se prenese negativna vrednost podatka.
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{

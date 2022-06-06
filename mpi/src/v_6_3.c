@@ -3,7 +3,7 @@
 #include <unistd.h> // usleep
 #include <mpi.h>
 
-void init_buff(int *buff, int len)
+void init_vec(int *buff, int len)
 {
 	for (int i = 0; i < len; i++)
 	{
