@@ -6,12 +6,97 @@
 #define TRUE 1
 #define FALSE 0
 
-void init_buff(int *buff, int len)
+#define MASTER_RANK 0
+#define MPI_NO_ERROR 0
+#define SLEEP_PERIOD 3000
+
+void init_vec(int *vec, int len)
 {
 	for (int i = 0; i < len; i++)
 	{
-		buff[i] = i;
+		vec[i] = i;
 	}
+}
+
+int *get_int_vec(int len)
+{
+	return (int *)malloc(len * sizeof(int));
+}
+
+void clear_vec(int *vec, int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		vec[i] = 0;
+	}
+}
+
+void print_3_num(int num)
+{
+	if (num < 10)
+	{
+		printf("0");
+	}
+	if (num < 100)
+	{
+		printf("0");
+	}
+	printf("%d", num);
+}
+
+void print_vec_as_mat(int *vec, int r_dim, int c_dim, int print_zeros)
+{
+	for (int i = 0; i < r_dim * c_dim; i++)
+	{
+		if (i % r_dim == 0)
+		{
+			printf("\n");
+		}
+		if (vec[i] == 0)
+		{
+			if (!print_zeros)
+			{
+				printf("---");
+			}
+			else
+			{
+				print_3_num(vec[i]);
+			}
+		}
+		else
+		{
+			print_3_num(vec[i]);
+		}
+		printf(" | ");
+	}
+}
+
+void print_vec(int *vec, int len, int print_zeros)
+{
+	for (int i = 0; i < len; i++)
+	{
+		if (vec[i] == 0)
+		{
+			if (!print_zeros)
+			{
+				printf("---");
+			}
+			else
+			{
+				print_3_num(vec[i]);
+			}
+		}
+		else
+		{
+			print_3_num(vec[i]);
+		}
+		printf(" | ");
+	}
+}
+
+int is_master(int my_rank)
+{
+	return my_rank == MASTER_RANK;
 }
 
 int main(int argc, char **argv)
@@ -19,48 +104,13 @@ int main(int argc, char **argv)
 
 	MPI_Init(&argc, &argv);
 
-	const int BUFF_SIZE = 20;
-	const int MASTER_RANK = 0;
-	const int MPI_NO_ERROR = MPI_SUCCESS;
-	const int SLEEP_PERIOD = 3000;
-
 	int my_rank;
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 	int comm_size;
 	MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
 
-	if (my_rank == MASTER_RANK)
-	{
-		int *buff = (int *)malloc(BUFF_SIZE * sizeof(int));
-		init_buff(buff, BUFF_SIZE);
-
-		printf("{%d} Sending buffer\n", my_rank);
-		// MPI_Send(buff, BUFF_SIZE, MPI_INTEGER, 1, 0, MPI_COMM_WORLD);
-
-		free(buff);
-	}
-	else
-	{
-
-		int *recv_buff = (int *)malloc(BUFF_SIZE * sizeof(int));
-		MPI_Status recv_status;
-
-		// MPI_Recv(recv_buff, BUFF_SIZE, MPI_INTEGER, MASTER_RANK, 0, MPI_COMM_WORLD, &recv_status);
-		if (recv_status.MPI_ERROR != MPI_NO_ERROR)
-		{
-			printf("In proc. %d we got an MPI_ERROR: %d", my_rank, recv_status.MPI_ERROR);
-			return recv_status.MPI_ERROR;
-		}
-
-		for (int i = 0; i < BUFF_SIZE; i++)
-		{
-			printf("{%d} Buff[%d] \t=>\t %d\n", my_rank, i, recv_buff[i]);
-		}
-
-		printf("\n");
-
-		free(recv_buff);
-	}
+	// you code here
+	// enjoy
 
 	MPI_Finalize();
 
