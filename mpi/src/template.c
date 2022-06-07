@@ -69,6 +69,7 @@ void print_vec_as_mat(int *vec, int r_dim, int c_dim, int print_zeros)
 		}
 		printf(" | ");
 	}
+	printf("\n");
 }
 
 void print_vec(int *vec, int len, int print_zeros)
@@ -92,6 +93,7 @@ void print_vec(int *vec, int len, int print_zeros)
 		}
 		printf(" | ");
 	}
+	printf("\n")
 }
 
 int is_master(int my_rank)

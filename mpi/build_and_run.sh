@@ -15,7 +15,8 @@ output_path="./bin/$output_file"
 echo -e "Building: \t $full_path"
 echo -e "Outputing to: \t $output_path"
 
-mpicc "$full_path" -o "$output_path"
+# lm will link libraries (for example so that math.h can be used)_
+mpicc "$full_path" -o "$output_path" -lm
 
 ret_code="$?"
 if [ $ret_code -ne 0 ]
@@ -29,4 +30,4 @@ echo "..."
 
 proc_num="$2"
 
-mpiexec -n "$proc_num" "$output_path"
+mpiexec -n "$proc_num" --hostfile ./hostfile "$output_path"
