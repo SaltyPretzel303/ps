@@ -30,4 +30,5 @@ echo "..."
 
 proc_num="$2"
 
-mpiexec -n "$proc_num" --hostfile ./hostfile "$output_path"
+# mpiexec -n "$proc_num" --hostfile ./hostfile "$output_path"
+mpiexec -n "$proc_num" "$output_path"

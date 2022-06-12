@@ -3,6 +3,10 @@
 #include <unistd.h> // usleep
 #include <mpi.h>
 
+// Napisati MPI program kojim se kreira dvodimenzionalna Cartesian struktura sa n vrsta i m
+// kolona.U svakom od nxm procesa odštampati identifikatore procesa njegovog levog i desnog
+// suseda na udaljenosti 2. Smatrati da su procesi u prvoj i poslednjoj koloni jedne vrste susedni.
+
 #define TRUE 1
 #define FALSE 0
 
@@ -111,9 +115,34 @@ int main(int argc, char **argv)
 	int comm_size;
 	MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
 
-	// you code here
-	// enjoy
-	// don't forget to free the memory :)
+	int r_dims = 4;
+	int c_dims = 4;
+
+	int ndims = 2;
+	int dims[2] = {r_dims, c_dims};
+	int periods[2] = {1, 1};
+	MPI_Comm cart_comm;
+	MPI_Cart_create(MPI_COMM_WORLD, ndims, dims, periods, 0, &cart_comm);
+
+	int cart_rank;
+	int coords[2];
+	MPI_Comm_rank(cart_comm, &cart_rank);
+	MPI_Cart_coords(cart_comm, cart_rank, 2, coords);
+
+	int left_rank;
+	int left_coords[2];
+	int right_rank;
+	int right_coords[2];
+	MPI_Cart_shift(cart_comm, 1, -2, &cart_rank, &left_rank);
+	MPI_Cart_shift(cart_comm, 1, 2, &cart_rank, &right_rank);
+
+	MPI_Cart_coords(cart_comm, left_rank, 2, left_coords);
+	MPI_Cart_coords(cart_comm, right_rank, 2, right_coords);
+
+	usleep(my_rank * 2 * SLEEP_PERIOD);
+	printf("world: {%d} = cart: {%d} [%d,%d]  <-[%d,%d] [%d,%d]->\n",
+		   my_rank, cart_rank, coords[0], coords[1],
+		   left_coords[0], left_coords[1], right_coords[0], right_coords[1]);
 
 	MPI_Finalize();
 

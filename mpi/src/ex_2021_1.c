@@ -269,7 +269,7 @@ int main(int argc, char **argv)
 
 	int rdc_bl_cnt = s;
 	int rdc_bl_size = MAT_DIM;
-	int rdc_bl_stride = ;
+	int rdc_bl_stride = -1;
 	MPI_Datatype reduce_vec_el = MPI_INTEGER;
 	MPI_Datatype reduce_vec;
 

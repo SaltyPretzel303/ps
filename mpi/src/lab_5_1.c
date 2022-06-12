@@ -3,6 +3,11 @@
 #include <unistd.h> // usleep
 #include <mpi.h>
 
+// Napisati MPI program koji kreira komunikator koji se sastoji od dijagonalnih procesa u
+// kvadratnoj mreži procesa.Iz master procesa novog komunikatora poslati poruku svim ostalim
+// procesima.Svaki proces novog komunikatora treba da prikaže primljenu poruku,
+// identifikator procesa u novom komunikatoru i stari identifikator procesa.
+
 #define TRUE 1
 #define FALSE 0
 
@@ -111,10 +116,45 @@ int main(int argc, char **argv)
 	int comm_size;
 	MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
 
-	// you code here
-	// enjoy
-	// don't forget to free the memory :)
+	int ndims = 2;
+	int dims[2] = {4, 4};
+	int periods[2] = {1, 1};
+	MPI_Comm cart_comm;
 
+	MPI_Cart_create(MPI_COMM_WORLD, ndims, dims, periods, 0, &cart_comm);
+
+	int cart_rank = -1;
+	int coords[2] = {-1, -1};
+	MPI_Comm_rank(cart_comm, &cart_rank);
+	MPI_Cart_coords(cart_comm, cart_rank, ndims, coords);
+
+	int color = 0;
+	if (coords[0] == coords[1])
+	{
+		color = 1;
+	}
+
+	int diag_rank = -1;
+	MPI_Comm diag_comm;
+	MPI_Comm_split(MPI_COMM_WORLD, color, 0, &diag_comm);
+	MPI_Comm_rank(diag_comm, &diag_rank);
+
+	int message_dim = 7;
+	char message[] = {'m',
+					  'e',
+					  's',
+					  's',
+					  'a',
+					  'g',
+					  'e'};
+
+	if (color == 1)
+	{
+		MPI_Bcast(message, message_dim, MPI_CHAR, MASTER_RANK, diag_comm);
+
+		usleep(my_rank * SLEEP_PERIOD);
+		printf("world: {%d} coords: [%d,%d] diag: %d\n", my_rank, coords[0], coords[1], diag_rank);
+	}
 	MPI_Finalize();
 
 	return 0;
