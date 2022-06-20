@@ -78,14 +78,17 @@ int main(void)
 	// ATTENTION the last one with the 1M elements is not included
 	// one with the 100k already has over 5GB ... (it got excluded as well)
 	// the last one that is gona be written is 10k
-	int dims_cnt = 4;
+	int dims_cnt = 5;
+	// for some reasone on with the 32 doesnt work ... so the max is 5
 
 	const char *out_path_10 = "/home/nemanja/workspace/ps/cuda/src/in_mat_10.txt";
 	const char *out_path_100 = "/home/nemanja/workspace/ps/cuda/src/in_mat_100.txt";
 	const char *out_path_1k = "/home/nemanja/workspace/ps/cuda/src/in_mat_1k.txt";
 	const char *out_path_5k = "/home/nemanja/workspace/ps/cuda/src/in_mat_5k.txt";
-	const char *out_path_10k = "/home/nemanja/workspace/ps/cuda/src/in_mat_10k.txt";
-	const char *out_path_1M = "/home/nemanja/workspace/ps/cuda/src/in_mat_1M.txt";
+	const char *out_path_4 = "/home/nemanja/workspace/ps/cuda/src/in_mat_4.txt";
+	const char *out_path_32x100 = "/home/nemanja/workspace/ps/cuda/src/in_mat_32x100.txt";
+	// const char *out_path_10k = "/home/nemanja/workspace/ps/cuda/src/in_mat_10k.txt";
+	// const char *out_path_1M = "/home/nemanja/workspace/ps/cuda/src/in_mat_1M.txt";
 
 	mat_desc matrices[5];
 	matrices[0].path = out_path_10;
@@ -100,11 +103,17 @@ int main(void)
 	matrices[3].path = out_path_5k;
 	matrices[3].dim = 5000;
 
-	matrices[4].path = out_path_10k;
-	matrices[4].dim = 10000;
+	matrices[4].path = out_path_4;
+	matrices[4].dim = 4;
 
-	matrices[5].path = out_path_1M;
-	matrices[5].dim = 1000000;
+	// matrices[5].path = out_path_32x100;
+	// matrices[5].dim = 3200;
+
+	// matrices[4].path = out_path_10k;
+	// matrices[4].dim = 10000;
+
+	// matrices[5].path = out_path_1M;
+	// matrices[5].dim = 1000000;
 
 	for (int i = 0; i < dims_cnt; i++)
 	{

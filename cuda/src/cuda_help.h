@@ -31,6 +31,14 @@ void init_vec(int *vec, int len)
 	}
 }
 
+void init_vec(int *vec, int len, int value)
+{
+	for (int i = 0; i < len; i++)
+	{
+		vec[i] = value;
+	}
+}
+
 int match(int *vec_a, int *vec_b, int vec_dim)
 {
 	for (int i = 0; i < vec_dim; i++)
