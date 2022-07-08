@@ -16,7 +16,7 @@ echo -e "Building: \t $full_path"
 echo -e "Outputing to: \t $output_path"
 
 # lm will link libraries (for example so that math.h can be used)_
-mpicc "$full_path" -o "$output_path" -lm
+mpic++ "$full_path" -o "$output_path" -lm
 
 ret_code="$?"
 if [ $ret_code -ne 0 ]

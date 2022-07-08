@@ -1,8 +1,8 @@
-#include<stdio.h>
+#include <stdio.h>
 #include "cuda_help.h"
 
-
-int main(void){
+int main(void)
+{
 
 	cudaDeviceReset();
 
